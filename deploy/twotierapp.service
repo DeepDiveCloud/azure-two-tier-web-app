@@ -1,0 +1,14 @@
+[Unit]
+Description=Azure Two Tier Flask Application
+After=network.target
+
+[Service]
+User=Max
+Group=Max
+WorkingDirectory=/opt/twotierapp
+Environment="PATH=/opt/twotierapp/venv/bin"
+ExecStart=/opt/twotierapp/venv/bin/gunicorn --workers 2 --bind 127.0.0.1:8000 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
